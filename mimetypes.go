@@ -5,8 +5,8 @@ const NO_MIME string = ""
 // Guess returns the mime type of the given data
 //
 // Otherwise return "application/octet-stream"
-func Guess(data []byte) string {
-	return defaultGuesser.Guess(data)
+func Guess(filename string, data []byte) string {
+	return defaultGuesser.Guess(filename, data)
 }
 
 // With registers a new guesser function

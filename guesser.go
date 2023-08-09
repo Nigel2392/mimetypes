@@ -1,6 +1,6 @@
 package mimetypes
 
-type GuesserFunc func([]byte) string
+type GuesserFunc func(filename string, data []byte) string
 
 type Guesser struct {
 	Funcs []GuesserFunc
@@ -20,10 +20,10 @@ func (g *Guesser) With(guesser ...GuesserFunc) {
 // Guess returns the mime type of the given data
 //
 // Otherwise return "application/octet-stream"
-func (g *Guesser) Guess(data []byte) string {
+func (g *Guesser) Guess(filename string, data []byte) string {
 	var mime string
 	for _, guesser := range g.Funcs {
-		if mime = guesser(data); mime != NO_MIME {
+		if mime = guesser(filename, data); mime != NO_MIME {
 			return mime
 		}
 	}
